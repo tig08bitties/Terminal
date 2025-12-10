@@ -1,5 +1,6 @@
 /**
- * Chariot Agent - Terminal-based agent using xterm, gcloud, and tn5250
+ * θεός | The_0S Chariot Agent
+ * Terminal-based agent using xterm, gcloud, and tn5250
  * Provides terminal emulation and command execution capabilities
  */
 
@@ -12,6 +13,7 @@ const execAsync = promisify(exec);
 class ChariotAgent extends EventEmitter {
   constructor(opts = {}) {
     super();
+    this.brand = 'θεός | The_0S';
     this.name = opts.name || 'chariot-agent';
     this.terminal = opts.terminal || 'xterm';
     this.gcloudProject = opts.gcloudProject || process.env.GOOGLE_CLOUD_PROJECT;
@@ -71,6 +73,7 @@ class ChariotAgent extends EventEmitter {
     }
 
     this.emit('initialized', {
+      brand: this.brand,
       agent: this.name,
       terminal: this.terminalAvailable,
       gcloud: this.gcloudAvailable,
@@ -80,6 +83,7 @@ class ChariotAgent extends EventEmitter {
 
     return {
       success: true,
+      brand: this.brand,
       agent: this.name,
       capabilities: {
         terminal: this.terminalAvailable,
@@ -454,6 +458,7 @@ class ChariotAgent extends EventEmitter {
    */
   getStatus() {
     return {
+      brand: this.brand,
       name: this.name,
       terminal: this.terminalAvailable,
       gcloud: this.gcloudAvailable,

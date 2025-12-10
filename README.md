@@ -1,11 +1,11 @@
-# ⚡ THEOS Terminal
+# ⚡ θεός | The_0S Terminal
 
 **Unified Terminal System with Web3 Wallet Integration**
 
 Based on xterm.js with integrated:
 - **Primary:** Covenant + Safe{wallet}
 - **Merged:** MetaMask SDK + TONKEEPER + OPENNETWORK
-- **Navigation:** tn5250 + SUSE + gcloud shell
+- **Navigation:** tn5250 + SUSE + gcloud shell (via Chariot Agent)
 - **Mode:** Background processing with GUI
 
 ## 🏗️ Architecture
