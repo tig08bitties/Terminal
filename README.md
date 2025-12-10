@@ -75,6 +75,7 @@ src/
 ├── unified-terminal/    # Unified terminal system
 ├── web-terminal/        # Web terminal server
 ├── chariot-agent/      # Terminal agent (tn5250, SUSE, gcloud)
+├── tn5250/             # tn5250 resources & connection scripts
 ├── safe/               # Safe{wallet} SDK integration
 └── brave/              # Brave Search API
 ```
