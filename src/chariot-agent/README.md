@@ -50,7 +50,12 @@ const agent = new ChariotAgent({
 // Initialize
 await agent.initialize();
 
-// Execute gcloud command in xterm
+// Launch interactive gcloud shell terminal
+await agent.launchGCloudShell({
+  useXterm: true
+});
+
+// Or execute gcloud command in xterm
 await agent.executeGCloud('compute instances list', {
   useXterm: true
 });
