@@ -29,28 +29,50 @@ async function main() {
       process.exit(1);
     }
 
-    if (!initResult.capabilities.terminal) {
-      console.error('❌ xterm is not available');
-      console.log('   Install: sudo apt-get install xterm');
-      process.exit(1);
-    }
-
     // Launch gcloud shell
     console.log('🌐 Launching gcloud shell terminal...');
     console.log('   Project:', agent.gcloudProject || 'default');
     console.log('');
 
-    const shellResult = await agent.launchGCloudShell({
-      useXterm: true
-    });
+    if (!initResult.capabilities.terminal) {
+      console.warn('⚠️  xterm is not available - will use fallback mode');
+      console.log('   Install xterm for full interactive terminal: sudo apt-get install xterm');
+      console.log('');
+    }
 
-    console.log('✅ gcloud shell launched');
-    console.log('   Session ID:', shellResult.sessionId);
-    console.log('   XTerm:', shellResult.xterm);
-    console.log('');
-    console.log('💡 The gcloud shell terminal window should now be open.');
-    console.log('   You can run gcloud commands interactively.');
-    console.log('   Close the terminal window when done.');
+    try {
+      const shellResult = await agent.launchGCloudShell({
+        useXterm: initResult.capabilities.terminal
+      });
+
+      if (shellResult.xterm) {
+        console.log('✅ gcloud shell launched in xterm window');
+        console.log('   Session ID:', shellResult.sessionId);
+        console.log('');
+        console.log('💡 The gcloud shell terminal window should now be open.');
+        console.log('   You can run gcloud commands interactively.');
+        console.log('   Close the terminal window when done.');
+      } else {
+        console.log('✅ gcloud shell info retrieved');
+        console.log('   Session ID:', shellResult.sessionId);
+        console.log('   Note: Interactive shell requires xterm');
+        if (shellResult.message) {
+          console.log('   Message:', shellResult.message);
+        }
+        if (shellResult.stdout) {
+          console.log('');
+          console.log('📋 Current gcloud configuration:');
+          console.log(shellResult.stdout);
+        }
+      }
+    } catch (error) {
+      console.error('❌ Failed to launch gcloud shell:', error.message);
+      console.log('');
+      console.log('💡 Troubleshooting:');
+      console.log('   1. Ensure gcloud is installed and authenticated');
+      console.log('   2. Install xterm: sudo apt-get install xterm');
+      console.log('   3. Set GOOGLE_CLOUD_PROJECT if needed');
+    }
 
   } catch (error) {
     console.error('❌ Error:', error.message);
