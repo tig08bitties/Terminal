@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  web-terminal:
+    build:
+      context: ../..
+      dockerfile: lib/web-terminal/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - RPC_URL=${RPC_URL:-https://arb1.arbitrum.io/rpc}
+      - NETWORK=${NETWORK:-arbitrum}
+      - GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT}
+      - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
+    volumes:
+      - ~/.config/gcloud:/root/.config/gcloud:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/gcloud/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

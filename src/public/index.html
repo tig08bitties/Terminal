@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THEOS Unified Terminal - Covenant + Safe{wallet} + Multi-Wallet</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/xterm@5.3.0/lib/xterm.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@5.3.0/css/xterm.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.8.0/lib/xterm-addon-fit.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚡ THEOS Unified Terminal System</h1>
+            <div class="system-info">
+                <span class="badge badge-primary">Covenant + Safe{wallet}</span>
+                <span class="badge badge-secondary">MetaMask</span>
+                <span class="badge badge-secondary">TONKEEPER</span>
+                <span class="badge badge-secondary">OPENNETWORK</span>
+            </div>
+            <div class="wallet-controls">
+                <button id="connect-metamask" class="btn btn-primary">MetaMask</button>
+                <button id="connect-tonkeeper" class="btn btn-secondary">TONKEEPER</button>
+                <button id="connect-opennetwork" class="btn btn-secondary">OPENNETWORK</button>
+                <button id="connect-safe" class="btn btn-primary">Safe{wallet}</button>
+                <div id="wallet-info" class="wallet-info hidden">
+                    <span id="wallet-address"></span>
+                    <button id="disconnect-wallet" class="btn btn-small">Disconnect</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="panel">
+                    <h3>Terminal Navigation</h3>
+                    <button class="nav-btn" data-command="gcloud-status">gcloud Status</button>
+                    <button class="nav-btn" data-command="tn5250">tn5250 (IBM i)</button>
+                    <button class="nav-btn" data-command="suse-status">SUSE Status</button>
+                </div>
+                <div class="panel">
+                    <h3>Wallet Operations</h3>
+                    <button class="nav-btn" data-command="treasury-status">Treasury Status</button>
+                    <button class="nav-btn" data-command="safe-status">Safe Status</button>
+                    <button class="nav-btn" data-command="wallet-balance">Wallet Balance</button>
+                </div>
+                <div class="panel">
+                    <h3>Research</h3>
+                    <button class="nav-btn" data-command="research-web3">Research Web3</button>
+                </div>
+            </div>
+
+            <div class="terminal-container">
+                <div id="terminal"></div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <span id="system-status">System: Initializing...</span>
+            <span id="wallet-status">Wallet: Not Connected</span>
+            <span id="terminal-status">Terminal: Ready</span>
+            <span id="background-status">Background: Active</span>
+        </div>
+    </div>
+
+    <script src="https://cdn.ethers.io/lib/ethers-6.0.0.umd.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
