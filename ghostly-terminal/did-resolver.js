@@ -3,6 +3,8 @@
 // Eternal Covenant Decentralized Identity
 // =====================================================
 
+import crypto from 'crypto';
+
 export class DIDResolver {
     constructor() {
         this.resolvers = new Map();
@@ -160,8 +162,6 @@ export class DIDResolver {
 
     generateIdentifier(method) {
         // Generate identifier based on method
-        const crypto = await import('crypto');
-
         switch (method) {
             case 'key':
                 // For key DID, use base58-encoded public key

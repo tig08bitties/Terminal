@@ -3,6 +3,8 @@
 // Eternal Covenant Privacy-Preserving Authentication
 // =====================================================
 
+import crypto from 'crypto';
+
 export class ZKPVerifier {
     constructor() {
         this.circuits = new Map();
@@ -81,7 +83,6 @@ export class ZKPVerifier {
         const signalsString = JSON.stringify(publicSignals);
 
         // Simple hash-based verification for demo
-        const crypto = await import('crypto');
         const combined = proofString + signalsString + verificationKey;
         const hash = crypto.createHash('sha256').update(combined).digest('hex');
         const isValid = hash.startsWith('00'); // Demo validation
@@ -160,14 +161,12 @@ export class ZKPVerifier {
 
     hashCredential(credential) {
         // Create a hash of the credential for ZKP input
-        const crypto = await import('crypto');
         const data = JSON.stringify(credential);
         return crypto.createHash('sha256').update(data).digest('hex');
     }
 
     hashPolicy(policy) {
         // Create a hash of the access policy
-        const crypto = await import('crypto');
         const data = JSON.stringify(policy);
         return crypto.createHash('sha256').update(data).digest('hex');
     }
@@ -214,7 +213,6 @@ export class ZKPVerifier {
 
     hashSet(set) {
         // Create a Merkle root or similar for the set
-        const crypto = await import('crypto');
         const sortedSet = [...set].sort();
         const data = JSON.stringify(sortedSet);
         return crypto.createHash('sha256').update(data).digest('hex');
