@@ -1,0 +1,45 @@
+! =====================================================
+! Eternal Covenant X Terminal Configuration
+! =====================================================
+
+! Colors (Covenant theme)
+*background: #1a1a1a
+*foreground: #ffffff
+*color0: #000000
+*color1: #ff6b6b
+*color2: #51cf66
+*color3: #ffd43b
+*color4: #74c0fc
+*color5: #da77f2
+*color6: #4ecdc4
+*color7: #f8f9fa
+*color8: #495057
+*color9: #ff8787
+*color10: #69db7c
+*color11: #ffe066
+*color12: #91d7ff
+*color13: #df9cf7
+*color14: #6cd3c8
+*color15: #ffffff
+
+! Font
+*faceName: Monospace
+*faceSize: 12
+
+! Scrollbar
+*scrollBar: true
+*scrollBar_right: true
+
+! Geometry
+*geometry: 120x30
+
+! Behavior
+*saveLines: 10000
+*loginShell: true
+*termName: xterm-256color
+
+! Key bindings for Covenant operations
+*translations: #override \
+    Ctrl <Key>F1: exec-formatted("echo '🏛️ Eternal Covenant Terminal'; openssl dgst -sha256 keys/master_key.pub | cut -d' ' -f2", NEWLINE) \n\
+    Ctrl <Key>F2: exec-formatted("tn5250 %s", STRING, "host:port") \n\
+    Ctrl <Key>F3: exec-formatted("node -e \"console.log('DID Authentication Active')\"", NEWLINE)
