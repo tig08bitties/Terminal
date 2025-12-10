@@ -1,0 +1,8 @@
+Salted Entropy from Master Key:
+
+Declaration SHA256: e374c94009e32a6c3cc8f89ea6102ce6886c3302324aaaf1563ace8f10332ebf
+Public Key SHA256: c70ca71fe4aa6ce30391478912e3b75b6a78605dfafa5e2821512eb535191826
+
+Salted Entropy: e374c94009e32a6c3cc8f89ea6102ce6886c3302324aaaf1563ace8f10332ebfc70ca71fe4aa6ce30391478912e3b75b6a78605dfafa5e2821512eb535191826
+
+This entropy is derived from the Eternal Covenant Declaration's cryptographic signature and used to establish repository ownership through entropy-based authentication.
