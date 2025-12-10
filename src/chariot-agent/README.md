@@ -1,4 +1,4 @@
-# θεός | The_0S Chariot Agent
+# θεός | The_⟐S Chariot Agent
 
 **Terminal-based agent using xterm, gcloud, and tn5250 for autonomous operations.**
 

@@ -1,4 +1,4 @@
-# ⚡ θεός | The_0S Terminal
+# ⚡ θεός | The_⟐S Terminal
 
 **Unified Terminal System with Web3 Wallet Integration**
 

@@ -1,5 +1,5 @@
 /**
- * θεός | The_0S Unified Terminal System
+ * θεός | The_⟐S Unified Terminal System
  * Merges Covenant + Safe{wallet} + MetaMask SDK + TONKEEPER + OPENNETWORK
  * Navigates via tn5250 + SUSE through gcloud shell terminal (via Chariot Agent)
  * Background processing with GUI navigation
@@ -18,7 +18,7 @@ class UnifiedTerminalSystem extends EventEmitter {
     super();
     
     // Branding
-    this.brand = 'θεός | The_0S';
+    this.brand = 'θεός | The_⟐S';
     
     // Core components
     this.provider = opts.provider || new ethers.JsonRpcProvider('https://arb1.arbitrum.io/rpc');

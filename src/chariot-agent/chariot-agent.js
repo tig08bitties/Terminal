@@ -1,5 +1,5 @@
 /**
- * θεός | The_0S Chariot Agent
+ * θεός | The_⟐S Chariot Agent
  * Terminal-based agent using xterm, gcloud, and tn5250
  * Provides terminal emulation and command execution capabilities
  */
@@ -13,7 +13,7 @@ const execAsync = promisify(exec);
 class ChariotAgent extends EventEmitter {
   constructor(opts = {}) {
     super();
-    this.brand = 'θεός | The_0S';
+    this.brand = 'θεός | The_⟐S';
     this.name = opts.name || 'chariot-agent';
     this.terminal = opts.terminal || 'xterm';
     this.gcloudProject = opts.gcloudProject || process.env.GOOGLE_CLOUD_PROJECT;
