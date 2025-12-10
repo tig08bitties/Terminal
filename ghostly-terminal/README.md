@@ -88,7 +88,16 @@ TN5250_USER=THEOS
 TN5250_PASSWORD=winter25
 ```
 
-### Terminal Commands
+### Terminal Configuration
+
+- **Dimensions**: 125 × 30 characters
+- **Font**: Monospace, Size 13px
+- **Cursor**: Block shape, White color
+- **Colors**: Background #171421, Text #FFFFFF
+- **Theme**: Rxvt-inspired with bold bright colors
+- **Layout**: Professional grid with status panels
+
+## Terminal Commands
 
 Once in the Ghostly Terminal interface:
 

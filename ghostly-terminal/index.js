@@ -65,6 +65,10 @@ class GhostlyTerminal {
                 shape: 'block',
                 blink: false,
                 color: '#FFFFFF'
+            },
+            style: {
+                font: 'Monospace',
+                fontSize: 13
             }
         });
 
@@ -240,12 +244,12 @@ class GhostlyTerminal {
     <title>🌑 Ghostly Terminal - Eternal Covenant</title>
     <style>
         body {
-            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-family: 'Monospace', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
             background: #171421;
             color: #FFFFFF;
             margin: 0;
             padding: 20px;
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.4;
         }
         .container {
@@ -269,9 +273,9 @@ class GhostlyTerminal {
             min-height: 400px;
             background: #171421;
             color: #FFFFFF;
-            font-family: inherit;
-            font-size: inherit;
-            line-height: inherit;
+            font-family: 'Monospace', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
+            line-height: 1.4;
             padding: 10px;
             border: 1px solid #555;
             border-radius: 3px;
@@ -283,8 +287,8 @@ class GhostlyTerminal {
             color: #FFFFFF;
             padding: 8px;
             width: calc(100% - 16px);
-            font-family: inherit;
-            font-size: inherit;
+            font-family: 'Monospace', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 13px;
             outline: none;
         }
         #input:focus {
