@@ -42,16 +42,25 @@ async function main() {
 
     try {
       const shellResult = await agent.launchGCloudShell({
-        useXterm: initResult.capabilities.terminal
+        useXterm: initResult.capabilities.terminal,
+        daemon: true  // Launch as daemon (detached process)
       });
 
       if (shellResult.xterm) {
-        console.log('✅ gcloud shell launched in xterm window');
+        console.log('✅ gcloud shell launched in xterm window (daemon mode)');
         console.log('   Session ID:', shellResult.sessionId);
+        if (shellResult.pid) {
+          console.log('   Process ID:', shellResult.pid);
+        }
+        console.log('   Geometry: 115x85 (115 columns x 85 rows)');
+        console.log('   Scheme: Rxvt');
+        console.log('   Background: #171421');
+        console.log('   Text Color: #FFFFFF');
         console.log('');
         console.log('💡 The gcloud shell terminal window should now be open.');
-        console.log('   You can run gcloud commands interactively.');
-        console.log('   Close the terminal window when done.');
+        console.log('   Running as daemon - you can continue using this terminal.');
+        console.log('   The xterm window is independent and will stay open.');
+        console.log('   Close the xterm window when done.');
       } else {
         console.log('✅ gcloud shell info retrieved');
         console.log('   Session ID:', shellResult.sessionId);

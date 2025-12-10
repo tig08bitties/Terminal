@@ -31,11 +31,18 @@ class ChariotAgent extends EventEmitter {
   async initialize() {
     // Check if xterm is available
     try {
-      await execAsync('which xterm');
+      // Try multiple common locations for xterm
+      await execAsync('which xterm || command -v xterm || test -f /usr/bin/xterm');
       this.terminalAvailable = true;
     } catch (error) {
-      this.terminalAvailable = false;
-      console.warn('xterm not found, terminal emulation may be limited');
+      // Also check if xterm binary exists even if not in PATH
+      try {
+        await execAsync('test -f /usr/bin/xterm');
+        this.terminalAvailable = true;
+      } catch (e) {
+        this.terminalAvailable = false;
+        console.warn('xterm not found, terminal emulation may be limited');
+      }
     }
 
     // Check if gcloud is available
@@ -96,7 +103,9 @@ class ChariotAgent extends EventEmitter {
   }
 
   /**
-   * Launch interactive gcloud shell terminal
+   * Launch interactive gcloud shell terminal as daemon
+   * Uses gcloud cloud-shell ssh for full Cloud Shell experience
+   * Configured with custom xterm appearance: 115x85, Rxvt scheme, custom colors
    */
   async launchGCloudShell(options = {}) {
     if (!this.gcloudAvailable) {
@@ -105,43 +114,104 @@ class ChariotAgent extends EventEmitter {
 
     const sessionId = `gcloud-shell-${Date.now()}`;
     const useXterm = options.useXterm !== false && this.terminalAvailable;
+    const daemon = options.daemon !== false; // Default to daemon mode
 
     return new Promise((resolve, reject) => {
       if (useXterm) {
-        // Launch xterm with interactive gcloud shell
-        // Try cloud-shell ssh first, fallback to interactive bash with gcloud configured
-        const xtermProcess = spawn('xterm', [
-          '-T', `θεός | The_⟐S - gcloud shell`,
+        // Launch xterm with gcloud cloud-shell ssh for full Cloud Shell experience
+        // This connects to Google Cloud Shell which provides an xterm-like environment
+        const env = {
+          ...process.env,
+          GOOGLE_CLOUD_PROJECT: this.gcloudProject || process.env.GOOGLE_CLOUD_PROJECT || '',
+          TERM: 'xterm-256color' // Set TERM for proper xterm compatibility
+        };
+
+        // Build the command: gcloud cloud-shell ssh with optional project flag
+        let cloudShellCmd = 'gcloud cloud-shell ssh';
+        if (this.gcloudProject) {
+          cloudShellCmd += ` --project=${this.gcloudProject}`;
+        }
+
+        // xterm configuration:
+        // - Geometry: 115 columns x 85 rows
+        // - Font: Monospace size 13
+        // - Background: #171421
+        // - Built-in scheme: Rxvt
+        // - Bold text in bright colors enabled
+        // - Default text color: #FFFFFF
+        // - Daemon mode: detached process
+        const xtermArgs = [
+          '-geometry', '115x85',           // 115 columns x 85 rows
+          '-fn', '*-monospace-*-*-*-13-*', // Monospace font size 13
+          '-bg', '#171421',                // Background color
+          '-fg', '#FFFFFF',                // Default text color (foreground)
+          '-cr', '#FFFFFF',                // Cursor color
+          '-bd', '#FFFFFF',                // Border color
+          '-ms', '#FFFFFF',                // Mouse pointer foreground
+          '-rv',                           // Reverse video (Rxvt scheme)
+          '+bc',                           // Enable bold text in bright colors
+          '-T', `θεός | The_⟐S - Google Cloud Shell`, // Window title
           '-e',
           'bash',
           '-c',
-          `gcloud cloud-shell ssh 2>/dev/null || exec bash -c 'echo "θεός | The_⟐S gcloud Shell"; echo "Project: ${this.gcloudProject || 'default'}"; echo "Type gcloud commands or exit to close"; export GOOGLE_CLOUD_PROJECT="${this.gcloudProject || ''}"; exec bash'`
-        ], {
-          env: { 
-            ...process.env, 
-            GOOGLE_CLOUD_PROJECT: this.gcloudProject || process.env.GOOGLE_CLOUD_PROJECT || ''
-          }
+          `echo "🚀 θεός | The_⟐S - Connecting to Google Cloud Shell..."; echo "Project: ${this.gcloudProject || 'default'}"; echo ""; ${cloudShellCmd} || { echo "⚠️  Cloud Shell SSH failed, using local gcloud environment"; echo "Setting TERM=xterm-256color"; export TERM=xterm-256color; export GOOGLE_CLOUD_PROJECT="${this.gcloudProject || ''}"; echo "θεός | The_⟐S gcloud Shell (Local)"; echo "Type gcloud commands or exit to close"; exec bash; }`
+        ];
+
+        // Launch xterm as daemon (detached process)
+        const xtermProcess = spawn('xterm', xtermArgs, {
+          env: env,
+          detached: daemon,  // Detach from parent process if daemon mode
+          stdio: daemon ? 'ignore' : 'inherit'  // Ignore stdio if daemon
         });
+
+        if (daemon) {
+          // Unref the process so parent can exit independently
+          xtermProcess.unref();
+        }
 
         this.activeSessions.set(sessionId, xtermProcess);
-        this.emit('gcloud-shell-launched', { sessionId, xterm: true, project: this.gcloudProject });
+        this.emit('gcloud-shell-launched', { 
+          sessionId, 
+          xterm: true, 
+          project: this.gcloudProject,
+          method: 'cloud-shell-ssh',
+          daemon: daemon,
+          geometry: '115x85',
+          scheme: 'Rxvt'
+        });
 
-        xtermProcess.on('close', (code) => {
-          this.activeSessions.delete(sessionId);
+        // For daemon mode, resolve immediately
+        if (daemon) {
           resolve({
-            success: code === 0,
+            success: true,
             sessionId,
-            exitCode: code,
-            xterm: true
+            xterm: true,
+            method: 'cloud-shell-ssh',
+            daemon: true,
+            pid: xtermProcess.pid,
+            message: 'gcloud shell launched as daemon - window should be visible'
           });
-        });
+        } else {
+          // For non-daemon mode, wait for process to close
+          xtermProcess.on('close', (code) => {
+            this.activeSessions.delete(sessionId);
+            resolve({
+              success: code === 0,
+              sessionId,
+              exitCode: code,
+              xterm: true,
+              method: 'cloud-shell-ssh',
+              daemon: false
+            });
+          });
 
-        xtermProcess.on('error', (error) => {
-          this.activeSessions.delete(sessionId);
-          reject(error);
-        });
+          xtermProcess.on('error', (error) => {
+            this.activeSessions.delete(sessionId);
+            reject(error);
+          });
+        }
       } else {
-        // Fallback: execute gcloud config list
+        // Fallback: show gcloud config and provide instructions
         execAsync('gcloud config list', {
           env: { ...process.env, GOOGLE_CLOUD_PROJECT: this.gcloudProject }
         }).then(result => {
@@ -151,7 +221,8 @@ class ChariotAgent extends EventEmitter {
             stdout: result.stdout,
             stderr: result.stderr,
             xterm: false,
-            message: 'gcloud shell requires xterm for interactive mode'
+            message: 'gcloud cloud-shell ssh requires xterm for interactive Cloud Shell connection',
+            instructions: 'Install xterm: sudo apt-get install xterm, then run again'
           });
         }).catch(error => {
           reject(error);
