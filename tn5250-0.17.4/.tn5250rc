@@ -1,0 +1,7 @@
+# Eternal Covenant tn5250 Configuration
+env.TERM=IBM-5251-11
+map=37
++ruler
+env.DEVNAME=COVENANT_SESSION
+host=pub400.com
+port=23
