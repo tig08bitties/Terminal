@@ -1,0 +1,43 @@
+{
+  "name": "ghostly-terminal",
+  "version": "1.0.0",
+  "description": "Ghostly Terminal - Eternal Covenant Enhanced Terminal Emulator",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "covenant": "node covenant-terminal.js",
+    "tn5250": "node tn5250-client.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "@hashgraph/sdk": "^2.50.0",
+    "did-jwt": "^7.4.2",
+    "did-resolver": "^4.1.0",
+    "snarkjs": "^0.7.4",
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5",
+    "blessed": "^0.1.81",
+    "blessed-contrib": "^4.11.0",
+    "chalk": "^5.3.0",
+    "commander": "^12.1.0",
+    "inquirer": "^9.2.16",
+    "node-pty": "^1.0.0",
+    "ws": "^8.16.0"
+  },
+  "keywords": [
+    "terminal",
+    "emulator",
+    "covenant",
+    "eternal",
+    "tn5250",
+    "ibm-i",
+    "web4",
+    "did",
+    "hedera",
+    "zkp"
+  ],
+  "author": "Eternal Covenant",
+  "license": "MIT"
+}
