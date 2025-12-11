@@ -75,65 +75,65 @@ class GhostlyTerminal {
         // Create layout
         const grid = new contrib.grid({rows: 12, cols: 12, screen: this.screen});
 
-        // Covenant status box
+        // Covenant status box - SUSE Black/Green Theme
         const covenantBox = grid.set(0, 0, 2, 4, blessed.box, {
-            label: chalk.cyan.bold('🏛️ Eternal Covenant'),
+            label: chalk.green.bold('🏛️ Eternal Covenant'),
             content: 'Status: VERIFIED\nIntegrity: OK\nSecurity: ACTIVE',
             border: {type: 'line'},
             style: {
-                border: {fg: 'cyan'},
-                bg: '#171421',
-                fg: '#FFFFFF'
+                border: {fg: 'green'},
+                bg: '#000000',
+                fg: '#00FF00'
             }
         });
 
-        // Connection status
+        // Connection status - SUSE Theme
         const connectionBox = grid.set(0, 4, 2, 4, blessed.box, {
-            label: chalk.green.bold('🔗 Connections'),
+            label: chalk.green.bold('🔗 SUSE Connections'),
             content: 'TN5250: DISCONNECTED\nDID: READY\nHCS: READY',
             border: {type: 'line'},
             style: {
                 border: {fg: 'green'},
-                bg: '#171421',
-                fg: '#FFFFFF'
+                bg: '#000000',
+                fg: '#00FF00'
             }
         });
 
-        // Terminal output
+        // Terminal output - Classic Black/Green
         const terminalBox = grid.set(2, 0, 8, 8, blessed.box, {
-            label: chalk.yellow.bold('💻 Terminal Output'),
-            content: 'Welcome to Ghostly Terminal...\nType commands below.',
+            label: chalk.green.bold('💻 SUSE Terminal'),
+            content: 'Welcome to Ghostly SUSE Terminal...\nBlack screen, green text - pure mojo!\nType commands below.',
             border: {type: 'line'},
             style: {
-                border: {fg: 'yellow'},
-                bg: '#171421',
-                fg: '#FFFFFF'
+                border: {fg: 'green'},
+                bg: '#000000',
+                fg: '#00FF00'
             },
             scrollable: true,
             alwaysScroll: true
         });
 
-        // Command input
+        // Command input - SUSE Style
         const inputBox = grid.set(10, 0, 2, 8, blessed.textbox, {
-            label: chalk.magenta.bold('⌨️ Command Input'),
+            label: chalk.green.bold('⌨️ SUSE Command'),
             inputOnFocus: true,
             border: {type: 'line'},
             style: {
-                border: {fg: 'magenta'},
-                bg: '#171421',
-                fg: '#FFFFFF'
+                border: {fg: 'green'},
+                bg: '#000000',
+                fg: '#00FF00'
             }
         });
 
-        // Status sidebar
+        // Status sidebar - SUSE Enterprise
         const statusBox = grid.set(0, 8, 12, 4, blessed.box, {
-            label: chalk.blue.bold('📊 System Status'),
-            content: 'Web4 Identity: ACTIVE\nZKP Privacy: ENABLED\nHedera Audit: LOGGING\nQuantum Ready: YES',
+            label: chalk.green.bold('📊 SUSE Status'),
+            content: 'Web4 Identity: ACTIVE\nZKP Privacy: ENABLED\nHedera Audit: LOGGING\nSUSE Ready: YES\nQuantum Safe: YES',
             border: {type: 'line'},
             style: {
-                border: {fg: 'blue'},
-                bg: '#171421',
-                fg: '#FFFFFF'
+                border: {fg: 'green'},
+                bg: '#000000',
+                fg: '#00FF00'
             }
         });
 
@@ -245,8 +245,8 @@ class GhostlyTerminal {
     <style>
         body {
             font-family: 'Monospace', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-            background: #171421;
-            color: #FFFFFF;
+            background: #000000;
+            color: #00FF00;
             margin: 0;
             padding: 20px;
             font-size: 13px;
@@ -260,61 +260,72 @@ class GhostlyTerminal {
             text-align: center;
             margin-bottom: 20px;
             font-weight: bold;
+            color: #00FF00;
+            text-shadow: 0 0 5px #00FF00;
         }
         .terminal {
-            background: #171421;
-            border: 2px solid #333;
+            background: #000000;
+            border: 2px solid #00FF00;
             padding: 20px;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(255,255,255,0.1);
+            box-shadow: 0 0 10px rgba(0,255,0,0.3);
         }
         #output {
             white-space: pre-wrap;
             min-height: 400px;
-            background: #171421;
-            color: #FFFFFF;
+            background: #000000;
+            color: #00FF00;
             font-family: 'Monospace', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
             font-size: 13px;
             line-height: 1.4;
             padding: 10px;
-            border: 1px solid #555;
+            border: 1px solid #00FF00;
             border-radius: 3px;
             margin-bottom: 10px;
+            text-shadow: 0 0 2px #00FF00;
         }
         #input {
-            background: #171421;
-            border: 2px solid #555;
-            color: #FFFFFF;
+            background: #000000;
+            border: 2px solid #00FF00;
+            color: #00FF00;
             padding: 8px;
             width: calc(100% - 16px);
             font-family: 'Monospace', 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
             font-size: 13px;
             outline: none;
+            text-shadow: 0 0 2px #00FF00;
         }
         #input:focus {
-            border-color: #FFFFFF;
-            box-shadow: 0 0 5px rgba(255,255,255,0.3);
+            border-color: #00FF00;
+            box-shadow: 0 0 5px rgba(0,255,0,0.5);
+            background: #001100;
         }
         .status {
             margin: 10px 0;
             padding: 15px;
-            background: #1a1a2e;
-            border: 1px solid #333;
+            background: #000000;
+            border: 1px solid #00FF00;
             border-radius: 3px;
             font-weight: bold;
+            color: #00FF00;
+            box-shadow: 0 0 5px rgba(0,255,0,0.2);
         }
         .command-highlight {
-            color: #00ff00;
+            color: #00FF00;
             font-weight: bold;
+            text-shadow: 0 0 3px #00FF00;
         }
         .error-highlight {
-            color: #ff4444;
+            color: #FF4444;
+            text-shadow: 0 0 3px #FF4444;
         }
         .success-highlight {
-            color: #44ff44;
+            color: #44FF44;
+            text-shadow: 0 0 3px #44FF44;
         }
         .info-highlight {
-            color: #4444ff;
+            color: #4444FF;
+            text-shadow: 0 0 3px #4444FF;
         }
         .blink {
             animation: blink 1s infinite;
@@ -328,37 +339,47 @@ class GhostlyTerminal {
 <body>
     <div class="container">
         <div class="header">
-            <h1>🌑 Ghostly Terminal - Eternal Covenant Enhanced</h1>
+            <h1>🌑 SUSE Ghostly Terminal - Eternal Covenant Enhanced</h1>
+            <div style="font-size: 12px; margin-top: 5px;">Black Screen • Green Text • SUSE Enterprise • Pure Mojo</div>
         </div>
         <div class="status">
-            <strong>Covenant Status:</strong> <span class="success-highlight">VERIFIED</span> |
+            <strong>SUSE Status:</strong> <span class="success-highlight">ENTERPRISE</span> |
+            <strong>Covenant:</strong> <span class="success-highlight">VERIFIED</span> |
             <strong>Web4 Identity:</strong> <span class="success-highlight">ACTIVE</span> |
-            <strong>Hedera Audit:</strong> <span class="success-highlight">ENABLED</span> |
-            <strong>ZKP Privacy:</strong> <span class="success-highlight">READY</span>
+            <strong>Hedera Audit:</strong> <span class="success-highlight">LOGGING</span> |
+            <strong>ZKP Privacy:</strong> <span class="success-highlight">ENABLED</span>
         </div>
         <div class="terminal">
-            <div id="output">Ghostly Terminal v1.0.0 - Eternal Covenant Enhanced
+            <div id="output">SUSE Ghostly Terminal v1.0.0 - Eternal Covenant Enhanced
 ═══════════════════════════════════════════════════════════════
 
-Welcome to the fully integrated Eternal Covenant Terminal!
+Welcome to SUSE Enterprise Terminal with Eternal Covenant Security!
 
-Terminal Size: 125x30 | Cursor: Block | Theme: Rxvt
-Background: #171421 | Text: #FFFFFF | Bold: Bright Colors
+Terminal Size: 125x30 | Cursor: Block | Font: Monospace 13px
+Background: #000000 | Text: #00FF00 | Theme: SUSE Black/Green
+SUSE Linux Enterprise | IBM i Integration | Web4 Identity
 
-Available commands:
+Available SUSE commands:
   covenant verify    - Verify Eternal Covenant integrity
-  tn5250 connect     - Connect to IBM i system
-  did resolve        - Test DID resolution
-  hedera log         - Log event to Hedera
-  zkp verify         - Test ZKP verification
-  status             - Show system status
-  help               - Show available commands
-  clear              - Clear terminal
-  exit               - Exit terminal
+  tn5250 connect     - Connect to IBM i system via SUSE
+  did resolve        - Test DID resolution on SUSE
+  hedera log         - Log SUSE events to Hedera HCS
+  zkp verify         - Test ZKP verification (SUSE compliant)
+  suse status        - Show SUSE system information
+  web status         - Start SUSE web interface
+  help               - Show SUSE terminal commands
+  clear              - Clear SUSE terminal
+  exit               - Exit SUSE Ghostly Terminal
 
-Type a command and press Enter...
+Type a SUSE command and press Enter...
+█████████████████████████████████████████████████████████████
+█                                                           █
+█               SUSE Linux Enterprise                       █
+█               Eternal Covenant Security                   █
+█                                                           █
+█████████████████████████████████████████████████████████████
 </div>
-            <input type="text" id="input" placeholder="ghostly@eternal-covenant:~$ " autofocus spellcheck="false">
+            <input type="text" id="input" placeholder="suse@ghostly-covenant:~$ " autofocus spellcheck="false">
         </div>
     </div>
 
@@ -375,9 +396,9 @@ Type a command and press Enter...
                 socket.emit('command', command);
                 output.textContent += prompt + command + '\n';
                 input.value = '';
-                input.placeholder = 'Processing...';
+                input.placeholder = 'SUSE Processing...';
                 setTimeout(() => {
-                    input.placeholder = 'ghostly@eternal-covenant:~$ ';
+                    input.placeholder = 'suse@ghostly-covenant:~$ ';
                 }, 100);
             }
         });
@@ -403,7 +424,7 @@ Type a command and press Enter...
         });
 
         socket.on('clear', () => {
-            output.innerHTML = 'Terminal cleared.\n\nGhostly Terminal v1.0.0 - Eternal Covenant Enhanced\n═══════════════════════════════════════════════════════════════\n\nWelcome back to the fully integrated Eternal Covenant Terminal!\n\nType "help" for available commands.\n\n';
+            output.innerHTML = 'SUSE Terminal cleared.\n\nSUSE Ghostly Terminal v1.0.0 - Eternal Covenant Enhanced\n═══════════════════════════════════════════════════════════════\n\nWelcome back to SUSE Enterprise Terminal!\n\nType "help" for available SUSE commands.\n\n█████████████████████████████████████████████████████████████\n█                                                           █\n█               SUSE Linux Enterprise                       █\n█               Eternal Covenant Security                   █\n█                                                           █\n█████████████████████████████████████████████████████████████\n\n';
             output.scrollTop = output.scrollHeight;
         });
     </script>
@@ -452,8 +473,8 @@ Type a command and press Enter...
                             response = '🌑 Ghostly Terminal Status Report\n═══════════════════════════════════════\n\n✅ Eternal Covenant: VERIFIED\n🆔 Web4 Identity: ACTIVE\n📝 Hedera HCS: ENABLED\n🔒 ZKP Privacy: READY\n🔌 TN5250 Client: AVAILABLE\n🌐 Web Interface: RUNNING\n\nTerminal Config:\n  Size: 125x30\n  Cursor: Block\n  Theme: Rxvt\n  Colors: Background #171421, Text #FFFFFF\n  Bold: Bright Colors Enabled';
                             break;
 
-                        case 'system info':
-                            response = '🖥️ System Information\n═══════════════════════════════════════\n\n🌑 Terminal: Ghostly v1.0.0\n🏛️ Framework: Eternal Covenant\n🆔 Identity: Decentralized (DID)\n📝 Audit: Hedera Consensus Service\n🔒 Privacy: Zero-Knowledge Proofs\n🔌 Protocols: TN5250, SSH, Telnet\n🌐 Interfaces: TUI, Web\n\nSecurity:\n  Encryption: AES-256 + RSA-2048\n  Authentication: Multi-factor\n  Audit: Immutable blockchain\n  Compliance: GDPR/SOX ready';
+                        case 'suse status':
+                            response = '🖥️ SUSE System Information\n═══════════════════════════════════════\n\n🐧 SUSE: Linux Enterprise Server\n🌑 Terminal: Ghostly v1.0.0\n🏛️ Framework: Eternal Covenant\n🆔 Identity: Decentralized (DID)\n📝 Audit: Hedera Consensus Service\n🔒 Privacy: Zero-Knowledge Proofs\n🔌 Protocols: TN5250, SSH, Telnet\n🌐 Interfaces: TUI, Web\n\nSUSE Features:\n  Enterprise Security: SUSE Security Module\n  IBM i Integration: TN5250 Terminal Access\n  Web4 Identity: DID + Hedera + ZKP\n  Compliance: GDPR/SOX/HIPAA ready\n  Authentication: Multi-factor Covenant\n\nSecurity Status:\n  ✅ Covenant: VERIFIED\n  ✅ Encryption: AES-256 + RSA-2048\n  ✅ Audit: Immutable blockchain\n  ✅ Privacy: ZKP enabled';
                             break;
 
                         case 'help':
