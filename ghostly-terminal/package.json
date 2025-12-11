@@ -25,9 +25,8 @@
     "commander": "^12.1.0",
     "inquirer": "^9.2.16",
     "node-pty": "^1.0.0",
-    "ws": "^8.16.0",
-    "wrtc": "^0.4.7",
-    "simple-peer": "^9.11.1"
+    "ws": "^8.18.0",
+    "wrtc": "^0.4.7"
   },
   "keywords": [
     "terminal",
