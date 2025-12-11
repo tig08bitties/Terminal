@@ -5,44 +5,34 @@
 # =====================================================
 
 # Font Configuration
-font-family = "Monospace"
+font-family = Monospace
 font-size = 13
 
 # SUSE Classic Black/Green Theme
-background = #000000
-foreground = #00FF00
+background = 000000
+foreground = 00ff00
 
 # Cursor Configuration
 cursor-style = block
-cursor-color = #FFFFFF
+cursor-color = ffffff
 
-# Terminal Size
+# Window Configuration
 window-width = 125
 window-height = 30
-
-# Scrollback
-scrollback-limit = 10000
-
-# Shell
-shell-integration = bash
-
-# Performance
-gpu-rendering = true
-
-# Padding
 window-padding-x = 4
 window-padding-y = 4
 
 # Title
-title = "SUSE Ghostly Terminal - Eternal Covenant"
+title = SUSE Ghostly Terminal - Eternal Covenant
 
-# Bell
-audible-bell = false
-visual-bell = false
+# Scrollback
+scrollback-limit = 10000
 
-# Copy/Paste
+# Shell Integration
+shell-integration = true
+
+# Copy on Select
 copy-on-select = true
 
-# Keybindings for TN5250
-# Ctrl+Shift+C = Copy
-# Ctrl+Shift+V = Paste
+# Theme
+theme = dark
