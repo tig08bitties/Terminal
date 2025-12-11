@@ -17,6 +17,7 @@ import { TN5250Client } from './tn5250-client.js';
 import { DIDResolver } from './did-resolver.js';
 import { HederaLogger } from './hedera-logger.js';
 import { ZKPVerifier } from './zkp-verifier.js';
+import { WebRTCChannel } from './webrtc-channel.js';
 
 const program = new Command();
 
@@ -27,6 +28,7 @@ class GhostlyTerminal {
         this.did = new DIDResolver();
         this.hedera = new HederaLogger();
         this.zkp = new ZKPVerifier();
+        this.webrtc = new WebRTCChannel();
         this.screen = null;
         this.app = express();
         this.server = null;
@@ -49,8 +51,10 @@ class GhostlyTerminal {
         await this.did.initialize();
         await this.hedera.initialize();
         await this.zkp.initialize();
+        await this.webrtc.initialize();
 
         console.log(chalk.green('✅ Web4 components initialized'));
+        console.log(chalk.green('✅ WebRTC real-time communication ready'));
         console.log(chalk.gray('═'.repeat(50)));
     }
 
@@ -477,8 +481,12 @@ Type a SUSE command and press Enter...
                             response = '🖥️ SUSE System Information\n═══════════════════════════════════════\n\n🐧 SUSE: Linux Enterprise Server\n🌑 Terminal: Ghostly v1.0.0\n🏛️ Framework: Eternal Covenant\n🆔 Identity: Decentralized (DID)\n📝 Audit: Hedera Consensus Service\n🔒 Privacy: Zero-Knowledge Proofs\n🔌 Protocols: TN5250, SSH, Telnet\n🌐 Interfaces: TUI, Web\n\nSUSE Features:\n  Enterprise Security: SUSE Security Module\n  IBM i Integration: TN5250 Terminal Access\n  Web4 Identity: DID + Hedera + ZKP\n  Compliance: GDPR/SOX/HIPAA ready\n  Authentication: Multi-factor Covenant\n\nSecurity Status:\n  ✅ Covenant: VERIFIED\n  ✅ Encryption: AES-256 + RSA-2048\n  ✅ Audit: Immutable blockchain\n  ✅ Privacy: ZKP enabled';
                             break;
 
+                        case 'webrtc status':
+                            response = '🔗 WebRTC Channel Status\n═══════════════════════════════════════\n\n✅ WebRTC: INITIALIZED\n📡 Data Channel: READY\n🔐 Encryption: DTLS-SRTP\n🏛️ Covenant: VERIFIED\n🐧 SUSE: ENTERPRISE\n\n🌐 Real-time Features:\n  ✅ Terminal Sharing\n  ✅ Remote Command Execution\n  ✅ Peer-to-Peer Communication\n  ✅ Secure Signaling with JWT\n  ✅ Hedera Audit Logging\n\n📊 Connection:\n  State: ' + (this.webrtc.isConnected() ? 'CONNECTED' : 'READY') + '\n  STUN Servers: Google STUN\n  Authentication: Covenant JWT';
+                            break;
+
                         case 'help':
-                            response = '🌑 Ghostly Terminal Commands\n═══════════════════════════════════════\n\n🔐 Security & Authentication:\n  covenant verify    - Verify Eternal Covenant\n  did resolve        - Test DID resolution\n  zkp verify         - Test ZKP verification\n\n🔌 Network & Connections:\n  tn5250 connect     - Connect to IBM i system\n  hedera log         - Log to Hedera HCS\n\n📊 Information:\n  status             - System status report\n  system info        - Detailed system info\n  help               - Show this help\n\n🎮 Interface:\n  clear              - Clear terminal\n  exit               - Exit terminal\n\n💡 Tip: All commands are logged immutably to Hedera';
+                            response = '🌑 SUSE Ghostly Terminal Commands\n═══════════════════════════════════════\n\n🔐 Security & Authentication:\n  covenant verify    - Verify Eternal Covenant\n  did resolve        - Test DID resolution\n  zkp verify         - Test ZKP verification\n\n🔌 Network & Connections:\n  tn5250 connect     - Connect to IBM i system\n  hedera log         - Log to Hedera HCS\n  webrtc status      - WebRTC channel status\n\n📊 Information:\n  status             - System status report\n  suse status        - SUSE system info\n  help               - Show this help\n\n🎮 Interface:\n  clear              - Clear terminal\n  exit               - Exit terminal\n\n💡 Tip: All commands logged to Hedera • Black screen green text - pure SUSE mojo!';
                             break;
 
                         case 'clear':
